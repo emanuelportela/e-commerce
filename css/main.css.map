@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,OAAO,CAAP,iHAAO",
+    "sources": [
+        "../src/assets/sass/main.sass"
+    ],
+    "names": [],
+    "file": "main.css"
+}
