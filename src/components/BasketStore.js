@@ -5,11 +5,11 @@ const store = new Vuex.Store({
       basket: [],
    },
    mutations: {
-      CreateBasket() {
-         
+      CreateBasket(state, basket) {
+         state.basket = basket
       },
-      AddToBasket() {
-
+      AddToBasket(state, beer) {
+         state.basket.push(beer)
       }
    }
 })

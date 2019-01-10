@@ -6,7 +6,7 @@
       </div>
 
       <div class="row">
-         <div class="col-4"  v-for="item in prix" :key="item" :class="{display: item.stock <= 0}">
+         <div class="col-4"  v-for="item in prix" :key="item.id" :class="{display: item.stock <= 0}">
          <!-- v-if="item.stock !== 0" -->
             <div class="card" :class="{yellow: item.stock == 1}">
                <img 
@@ -22,7 +22,7 @@
                   <p class="card-text">{{item.description}}</p>
                   <div class="d-flex justify-content-between">
                      <span class="text-primary"><strong>{{item.price | signe}}</strong></span>
-                     <a href="#" class="btn btn-primary">Ajouter</a>
+                     <a href="#" class="btn btn-primary" v-on:click.prevent="addBeerToBasket(item)">Ajouter</a>
                      <span>{{item.stock}} en stock</span>
                   </div>
                </div>
@@ -48,13 +48,18 @@ export default {
             this.products = response.data
          })
       },
-      addBeerToBasket() {
-         
+      addBeerToBasket(beer) {
+         this.$http.post("http://localhost:1337/api/v1/basket", beer).then(response => {
+            this.$store.commit("AddToBasket", beer)
+            // un commit sert à appeler une mutation
+      }),
+      this.recup()
       }
    },
    created() {
       this.recup()
    },
+   
    computed: {
       prix() {
          if (this.tri) {
@@ -68,6 +73,7 @@ export default {
       }
    },
 }
+
 </script>
 
 
